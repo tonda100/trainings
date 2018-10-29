@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginxproxy-deployment
+  labels:
+    app: nginxproxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginxproxy
+  template:
+    metadata:
+      labels:
+        app: nginxproxy
+    spec:
+      containers:
+      - name: nginxproxy
+        image: nginx:1.15-alpine
+        volumeMounts:
+          - name: nginx-config
+            mountPath: /etc/nginx/nginx.conf
+            subPath: nginx.conf
+        ports:
+        - containerPort: 80
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: nginx-config
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginxproxy-service
+spec:
+  type: NodePort
+  selector:
+    app: nginxproxy
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80

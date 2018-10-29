@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hellodb-deployment
+  labels:
+    app: hellodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hellodb
+  template:
+    metadata:
+      labels:
+        app: hellodb
+    spec:
+      containers:
+      - name: hellodb
+        image: postgres:11.0
+        env:
+        - name: POSTGRES_DB
+          value: "hellodb"
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgres-credentials
+              key: username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-credentials
+              key: password
+        ports:
+        - containerPort: 5432
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: hellodb
+spec:
+  selector:
+    app: hellodb
+  ports:
+  - protocol: TCP
+    port: 5432
+    targetPort: 5432
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pgadmin-deployment
+  labels:
+    app: pgadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pgadmin
+  template:
+    metadata:
+      labels:
+        app: pgadmin
+    spec:
+      containers:
+      - name: pgadmin
+        image: fenglc/pgadmin4:python3.6-alpine
+        env:
+        - name: DEFAULT_USER
+          value: "user@domain.com"
+        - name: DEFAULT_PASSWORD
+          value: "Password1."
+        - name: PGADMIN_PORT
+          value: "5050"
+        ports:
+        - containerPort: 5050
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: pgadmin
+spec:
+  type: NodePort
+  selector:
+    app: pgadmin
+  ports:
+  - protocol: TCP
+    port: 5050
+    targetPort: 5050
