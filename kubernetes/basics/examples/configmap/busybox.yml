@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: print-pod
+  labels:
+    app: print
+spec:
+  containers:
+  - name: print-container
+    image: busybox
+    command: ['sh', '-c', 'echo $(SERVER) $(PORT) && sleep 3600']
+    env:
+      - name: SERVER
+        valueFrom:
+          configMapKeyRef:
+            name: busybox-config
+            key: server.name
+      - name: PORT
+        valueFrom:
+          configMapKeyRef:
+            name: busybox-config
+            key: server.port
