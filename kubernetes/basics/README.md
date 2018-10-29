@@ -1,4 +1,4 @@
-# Kubernetes Workshop
+# Kubernetes Basics Workshop
 
 1. Install locally kubernetes cluster
     * Docker
@@ -38,7 +38,7 @@
 ### Web UI
 * `kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml` - deploys
 * `kubectl proxy` - HTTP proxy to access the Kubernetes API
-* [WEB UI](http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login)
+* WEB UI - [http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login](http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login)
 
 ### Config Map
 * `kubectl create configmap busybox-config --from-literal=server.name=homer --from-literal=server.port=80` - creates config map with properties
