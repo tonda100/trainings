@@ -1,8 +1,8 @@
 # Kubernetes Workshop
 
 1. Install locally kubernetes cluster
-  * Docker
-  * [Minikube](https://kubernetes.io/docs/setup/minikube/) - [Download page](https://github.com/kubernetes/minikube/releases)
+    * Docker
+    * [Minikube](https://kubernetes.io/docs/setup/minikube/) - [Download page](https://github.com/kubernetes/minikube/releases)
 2. Install kubectl - [Download page](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 3. Verify installation - `kubectl get nodes`
 
