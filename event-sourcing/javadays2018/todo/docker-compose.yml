@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  zookeeper:
+    image: zookeeper:3.4.12
+
+  kafka:
+    depends_on:
+      - zookeeper
+    image: confluentinc/cp-kafka:4.1.1
+    environment:
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+      - KAFKA_NUM_PARTITIONS=32
+      - KAFKA_LOG_RETENTION_MS=-1
+      - KAFKA_COMPRESSION_TYPE=gzip
+      - KAFKA_DELETE_TOPIC_ENABLE=false
+      - KAFKA_LOG_CLEANUP_POLICY=compact
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+    ports:
+      - 9092:9092
