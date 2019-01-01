@@ -4,7 +4,7 @@ I setup Kubernetes Ingress with Traefik. You can read more about it on my [blog]
 
 You can try most of it with **DockerForMac** except [Let's Encrypt](https://letsencrypt.org/) part.
 
-Since it is all about routing trafic you need to setup my example domains `hostynskaosma.cz www.hostynskasoam.cz traefik.mydoamin.com` to your `/etc/hosts` or you cen just get inspired by yaml files.
+Since it is all about routing trafic you need to setup my example domains `hostynskaosma.cz www.hostynskasoam.cz traefik.mydoamin.com` to your `/etc/hosts` or you can just get inspired by yaml files.
 
 ## Install Tomcat
 
@@ -39,6 +39,8 @@ Since it is all about routing trafic you need to setup my example domains `hosty
     kubectl apply -f traefik-service.yml
     ```
 
+Now tomcat home page should be accessible at [https://www.hostynskaosma.cz/](https://www.hostynskaosma.cz/)
+
 ## Traefik Dashboard
 
 * Install traefik dashboard Service
@@ -52,7 +54,7 @@ Since it is all about routing trafic you need to setup my example domains `hosty
     ```bash
     htpasswd -c ./dashboard-auth traefik
     ```
-    See [traefik-auth](traefik-auth)
+    See [dashboard-auth](dashboard-auth)
   * Create `dashboard-basic-auth` Secret out of `dashboard-auth` file
     ```bash
     kubectl create secret generic dashboard-basic-auth --from-file dashboard-auth --namespace=kube-system
@@ -61,6 +63,8 @@ Since it is all about routing trafic you need to setup my example domains `hosty
     ```bash
     kubectl apply -f dashboard-ingress.yml
     ```
+
+Now Traefik Dashboard should be accessible at [https://traefik.mydomain.com/](https://traefik.mydomain.com/) traefik/Password1
 
 ## Generate certificate
 There is show how I created fake certificate as an example
