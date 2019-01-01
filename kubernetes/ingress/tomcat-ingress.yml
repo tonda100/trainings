@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: tomcat-ingress
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    ingress.kubernetes.io/ssl-redirect: "true"
+    traefik.ingress.kubernetes.io/redirect-permanent: "true"
+    traefik.ingress.kubernetes.io/redirect-regex: ^https?://hostynskaosma.cz/(.*)
+    traefik.ingress.kubernetes.io/redirect-replacement: https://www.hostynskaosma.cz/$1
+spec:
+  tls:
+  - hosts:
+    - www.hostynskaosma.cz
+    secretName: tomcat-secret
+  rules:
+  - host: hostynskaosma.cz
+    http:
+      paths:
+      - backend:
+          serviceName: tomcat
+          servicePort: 8080
+  - host: www.hostynskaosma.cz
+    http:
+      paths:
+      - backend:
+          serviceName: tomcat
+          servicePort: 8080

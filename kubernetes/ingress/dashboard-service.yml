@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: traefik-admin
+  namespace: kube-system
+spec:
+  selector:
+    k8s-app: traefik-ingress-lb
+  ports:
+    - name: admin
+      port: 8080
+      targetPort: 8080
