@@ -1,0 +1,7 @@
+FROM alpine
+COPY id_rsa ~/.ssh/
+RUN apk add --no-cache openssh-client git
+RUN mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+RUN git clone git@bitbucket.org:bscideas/rbcz-be.git
+RUN ls -all rbcz-be
