@@ -1,0 +1,4 @@
+# syntax=docker/dockerfile:1.0.0-experimental
+FROM alpine
+COPY txt-files/* txt-files/
+RUN --mount=target=txt-files/txt-files tar -cf txt-files.tar txt-files

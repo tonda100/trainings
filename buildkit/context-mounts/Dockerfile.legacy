@@ -1,0 +1,4 @@
+FROM alpine
+COPY txt-files/* txt-files/
+RUN tar -cf txt-files.tar txt-files
+RUN rm -rf txt-files
