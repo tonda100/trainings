@@ -2,8 +2,11 @@
 
 FROM alpine
 
-RUN apk add --no-cache openssh-client git
-RUN mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
+RUN apk add --no-cache openssh git
+# RUN mkdir -p -m 0600 ~/.ssh && ssh-keyscan bitbucket.org >> ~/.ssh/known_hosts
+RUN mkdir -m 700 /root/.ssh; \
+  touch -m 600 /root/.ssh/known_hosts; \
+  ssh-keyscan bitbucket.com > /root/.ssh/known_hosts
 
 RUN --mount=type=ssh git clone git@bitbucket.org:bscideas/rbcz-be.git
 RUN ls -all rbcz-be
