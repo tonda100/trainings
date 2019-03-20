@@ -1,0 +1,4 @@
+FROM alpine
+COPY src-files/* container-files/
+RUN tar -cf files.tar container-files
+RUN rm -rf container-files
