@@ -1,0 +1,7 @@
+# This section contains the default values for your application settings.
+port: 8000
+wordpress:
+  version: latest
+mysql:
+  user: wordpress
+  password: tralalala

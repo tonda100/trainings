@@ -1,0 +1,13 @@
+# This section contains your application metadata.
+# Version of the application
+version: 0.1.0
+# Name of the application
+name: wordpress
+# A short description of the application
+description:
+# Namespace to use when pushing to a registry. This is typically your Hub username.
+#namespace: myHubUsername
+# List of application maintainers with name and email for each
+maintainers:
+  - name: Antonin Stoklasek
+    email: antonin.stoklasek@bsc-ideas.com
