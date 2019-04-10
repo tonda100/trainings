@@ -1,0 +1,139 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>cz.bsc</groupId>
+    <artifactId>ai-intro</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <dependencies>
+      <!-- ND4J backend. You need one in every DL4J project. Normally define artifactId as either "nd4j-native-platform" or "nd4j-cuda-9.2-platform" -->
+              <dependency>
+                  <groupId>org.nd4j</groupId>
+                  <artifactId>${nd4j.backend}</artifactId>
+                  <version>${nd4j.version}</version>
+              </dependency>
+
+              <!-- Core DL4J functionality -->
+              <dependency>
+                  <groupId>org.deeplearning4j</groupId>
+                  <artifactId>deeplearning4j-core</artifactId>
+                  <version>${dl4j.version}</version>
+              </dependency>
+
+              <dependency>
+                  <groupId>org.deeplearning4j</groupId>
+                  <artifactId>deeplearning4j-nlp</artifactId>
+                  <version>${dl4j.version}</version>
+              </dependency>
+
+              <dependency>
+                  <groupId>org.deeplearning4j</groupId>
+                  <artifactId>deeplearning4j-zoo</artifactId>
+                  <version>${dl4j.version}</version>
+              </dependency>
+
+              <!-- deeplearning4j-ui is used for visualization: see http://deeplearning4j.org/visualization -->
+              <dependency>
+                  <groupId>org.deeplearning4j</groupId>
+                  <artifactId>deeplearning4j-ui_${scala.binary.version}</artifactId>
+                  <version>${dl4j.version}</version>
+              </dependency>
+
+              <!-- ParallelWrapper & ParallelInference live here -->
+              <dependency>
+                  <groupId>org.deeplearning4j</groupId>
+                  <artifactId>deeplearning4j-parallel-wrapper</artifactId>
+                  <version>${dl4j.version}</version>
+              </dependency>
+
+              <!-- Next 2: used for MapFileConversion Example. Note you need *both* together -->
+              <dependency>
+                  <groupId>org.datavec</groupId>
+                  <artifactId>datavec-hadoop</artifactId>
+                  <version>${datavec.version}</version>
+              </dependency>
+              <dependency>
+                  <groupId>org.apache.hadoop</groupId>
+                  <artifactId>hadoop-common</artifactId>
+                  <version>${hadoop.version}</version>
+                  <exclusions>
+                      <exclusion>
+                          <groupId>jdk.tools</groupId>
+                          <artifactId>jdk.tools</artifactId>
+                      </exclusion>
+                      <exclusion>
+                          <groupId>log4j</groupId>
+                          <artifactId>log4j</artifactId>
+                      </exclusion>
+                      <exclusion>
+                          <groupId>org.slf4j</groupId>
+                          <artifactId>slf4j-log4j12</artifactId>
+                      </exclusion>
+                  </exclusions>
+              </dependency>
+
+
+              <!-- Arbiter - used for hyperparameter optimization (grid/random search) -->
+              <dependency>
+                  <groupId>org.deeplearning4j</groupId>
+                  <artifactId>arbiter-deeplearning4j</artifactId>
+                  <version>${arbiter.version}</version>
+              </dependency>
+              <dependency>
+                  <groupId>org.deeplearning4j</groupId>
+                  <artifactId>arbiter-ui_${scala.binary.version}</artifactId>
+                  <version>${arbiter.version}</version>
+              </dependency>
+
+              <!-- datavec-data-codec: used only in video example for loading video data -->
+              <dependency>
+                  <artifactId>datavec-data-codec</artifactId>
+                  <groupId>org.datavec</groupId>
+                  <version>${datavec.version}</version>
+              </dependency>
+
+              <!-- Used in the feedforward/classification/MLP* and feedforward/regression/RegressionMathFunctions example -->
+              <dependency>
+                  <groupId>jfree</groupId>
+                  <artifactId>jfreechart</artifactId>
+                  <version>${jfreechart.version}</version>
+              </dependency>
+              <dependency>
+                  <groupId>org.jfree</groupId>
+                  <artifactId>jcommon</artifactId>
+                  <version>${jcommon.version}</version>
+              </dependency>
+
+              <!-- Used for downloading data in some of the examples -->
+              <dependency>
+                  <groupId>org.apache.httpcomponents</groupId>
+                  <artifactId>httpclient</artifactId>
+                  <version>4.3.5</version>
+              </dependency>
+
+              <dependency>
+                  <groupId>ch.qos.logback</groupId>
+                  <artifactId>logback-classic</artifactId>
+                  <version>${logback.version}</version>
+              </dependency>
+    </dependencies>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- Change the nd4j.backend property to nd4j-cuda-9.0-platform nd4j-cuda-9.2-platform or nd4j-cuda-10.0-platform to use CUDA GPUs -->
+        <nd4j.backend>nd4j-native-platform</nd4j.backend>
+        <!--<nd4j.backend>nd4j-cuda-9.2-platform</nd4j.backend>-->
+        <nd4j.version>1.0.0-beta3</nd4j.version>
+        <dl4j.version>1.0.0-beta3</dl4j.version>
+        <datavec.version>1.0.0-beta3</datavec.version>
+
+        <!-- Scala binary version: DL4J's Spark and UI functionality are released with both Scala 2.10 and 2.11 support -->
+        <scala.binary.version>2.11</scala.binary.version>
+
+        <hadoop.version>2.2.0</hadoop.version>
+        <arbiter.version>1.0.0-beta3</arbiter.version>
+        <logback.version>1.1.7</logback.version>
+        <jfreechart.version>1.0.13</jfreechart.version>
+        <jcommon.version>1.0.23</jcommon.version>
+    </properties>
+</project>
