@@ -91,25 +91,6 @@
                   <version>${datavec.version}</version>
               </dependency>
 
-              <!-- Used in the feedforward/classification/MLP* and feedforward/regression/RegressionMathFunctions example -->
-              <dependency>
-                  <groupId>jfree</groupId>
-                  <artifactId>jfreechart</artifactId>
-                  <version>${jfreechart.version}</version>
-              </dependency>
-              <dependency>
-                  <groupId>org.jfree</groupId>
-                  <artifactId>jcommon</artifactId>
-                  <version>${jcommon.version}</version>
-              </dependency>
-
-              <!-- Used for downloading data in some of the examples -->
-              <dependency>
-                  <groupId>org.apache.httpcomponents</groupId>
-                  <artifactId>httpclient</artifactId>
-                  <version>4.3.5</version>
-              </dependency>
-
               <dependency>
                   <groupId>ch.qos.logback</groupId>
                   <artifactId>logback-classic</artifactId>
@@ -133,7 +114,5 @@
         <hadoop.version>2.2.0</hadoop.version>
         <arbiter.version>1.0.0-beta3</arbiter.version>
         <logback.version>1.1.7</logback.version>
-        <jfreechart.version>1.0.13</jfreechart.version>
-        <jcommon.version>1.0.23</jcommon.version>
     </properties>
 </project>

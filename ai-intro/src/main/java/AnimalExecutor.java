@@ -22,10 +22,10 @@ public class AnimalExecutor {
     private static final String[] labels = { "giraffe", "rainbow" };
 
     public static void main(String[] args) throws Exception {
-        MultiLayerNetwork network = ModelSerializer.restoreMultiLayerNetwork("model1554894708165.bin");
+        MultiLayerNetwork network = ModelSerializer.restoreMultiLayerNetwork("model.bin");
 
         BaseImageLoader imageLoader = new NativeImageLoader(height, width, channels);
-        INDArray image = imageLoader.asMatrix(new File("test-images/b.jpg"));
+        INDArray image = imageLoader.asMatrix(new File("test-images/c.jpg"));
 
 
         INDArray output = network.output(image);
