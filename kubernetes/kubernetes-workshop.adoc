@@ -1,0 +1,15 @@
+Kubernetes
+Workshop pro vývojáře o tom, co je to Kubernetes, žádné předchozí zkušenosti s Kubernetes nejsou potřeba, ale účastník by měl mít zkušenosti s Docker (ideálně umět vše, co je zmíněno v tom workshopu Docker výše). Délka 4 hodiny.
+What is Kubernetes?
+Why use Kubernetes?
+Simple Installation
+Container => Pod
+Stateless deployments
+Configuration
+Using Services
+Secrets
+Statefull deployments
+Limiting resources
+Ingress
+Monitoring and Alerting
+Logging

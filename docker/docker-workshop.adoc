@@ -1,0 +1,150 @@
+= Docker workshop
+
+== What is Docker?
+* tool for easy create, deploy and run applications by using containers
+* container platform
+* lightweight VM
+* https://www.docker.com/[Docker]
+
+== Registry vs. Image vs. Container
+* Registry - place for storing e.g. https://hub.docker.com/[Docker Hub] (something like Github for source code)
+* Image - read-only template for container
+* Container - instance of an image
+Docker file system is layered based. When running a container there is write layer on top of read-only layers of image.
+This write layer contains all files modified or created by started container.
+
+== Install Docker
+* Windows
+* MacOS
+* Linux
+
+== Running container
+
+List of running containers.
+----
+docker ps
+----
+List of all containers (created, running or stopped)
+----
+docker ps -a
+----
+
+Image will be pulled when starting a container for the first time, but you can pulled by using a command. `docker pull [image name]`
+----
+docker pull nginx
+----
+
+Find you image on https://hub.docker.com/[Docker Hub] and run it locally.
+----
+docker run -d --name nginx -p 80:80 -v /Users/astoklasek/junk/nginx:/usr/share/nginx/html nginx
+----
+Useful parameters:
+
+* `-d` \ `-it` - two possibilities how to run container
+** `-d` - run container in background (detach)
+** `-it` - run container in interactive mode
+* `--name` - name of running containers
+* `-p` - port mapping (host port : container port)
+* `-v` - volume mapping (host folder : container folder)
+
+----
+docker cp [source] [target]
+docker cp file container:/path/
+docker cp container:/path/ /local/folder
+----
+Container does not have to be in running state to use `cp` command.
+
+You can connect to running container by using `exec` command.
+----
+docker exec -it nginx /bin/bash
+----
+Or you can just run a command in a running container.
+----
+docker exec -i nginx ls /
+----
+
+== Environment variables
+Environment variable are used to pass information to container at start time.
+
+Example: Starting Postgres container and setting username and password at start up.
+----
+docker run -d --name postgres -p 5432:5432 -e POSTGRES_USER=workshop -e POSTGRES_PASSWORD=workshop123 postgres:12
+----
+When there are multiple environment variables, it is better to use file to store them and just reference the file.
+----
+docker run -d --name postgres -p 5432:5432 --env-file  /Users/astoklasek/docker/postgres.properties postgres:12
+----
+postgres.properties
+[source,text]
+----
+POSTGRES_USER=workshop
+POSTGRES_PASSWORD=workshop123
+----
+
+== Create Docker Image
+
+There are two possibilities how to create a docker image.
+
+* Commit container - `docker commit [container name] [image name]`
+* Dockerfile build
+
+=== Dockerfile
+Dockerfile is a file describing how docker image should be build. Useful commands:
+
+* `FROM nginx` - setup base image
+* `COPY [source file] [target path]` - copy a file into image
+* `RUN [command]` - run a command
+* `USER [username]` - switch to a different user
+
+Build of image is done using command:
+----
+docker build -t [image name] .
+----
+In case that command is not invoked in folde with Dockerfile you might also specify path to Dockerfile and its name:
+----
+docker build -t [image name] -f docker/Dockerfile.native .
+----
+
+== Sharing Docker Images
+Local images can be shared with others on Docker Hub.
+
+. Create an account on Docker Hub
+. Create a repository on Docker Hub.
+. Login with credentials `docker login`
+. Push previously created image `docker push antoninstoklasekbsc/workshop`
+
+Name of image has to contain username. When image is public, it is free to push an share your image.
+
+== Docker Network
+Containers may communicate between each other, but to allow inter container communication containers has to be attach into same network.
+To attach container in a network you need to create a network first.
+----
+docker network create workshop
+----
+Attach running container in existing network
+----
+docker network connect [network name] [container name]
+----
+There is also possibility to connect container to a network at start time.
+----
+docker run -d --name mysql --net workshop \
+    -e MYSQL_ROOT_PASSWORD=Heslo123 \
+    -e MYSQL_DATABASE=workshop \
+    -e MYSQL_USER=workshop \
+    -e MYSQL_PASSWORD=workshop123 \
+    mysql
+
+docker run -d --name phpmyadmin --net workshop -p 80:80 \
+    -e PMA_HOST=mysql \
+    -e PMA_PORT=3306
+    -e PMA_USER=workshop
+    -e PMA_PASSWORD=workshop123
+    phpmyadmin/phpmyadmin
+----
+
+=== Container - Host communication
+Sometimes it is useful to call host machine from container. There are predefined hostnames for that purpose.
+
+* Mac - `docker.for.mac.localhost`
+* Win - `docker.for.win.localhost`
+* Linux - ???
