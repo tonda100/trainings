@@ -132,13 +132,13 @@ docker run -d --name mysql --net workshop \
     -e MYSQL_DATABASE=workshop \
     -e MYSQL_USER=workshop \
     -e MYSQL_PASSWORD=workshop123 \
-    mysql
+    mysql:5
 
 docker run -d --name phpmyadmin --net workshop -p 80:80 \
     -e PMA_HOST=mysql \
-    -e PMA_PORT=3306
-    -e PMA_USER=workshop
-    -e PMA_PASSWORD=workshop123
+    -e MYSQL_ROOT_PASSWORD=Heslo123 \
+    -e MYSQL_USER=workshop \
+    -e MYSQL_PASSWORD=workshop123 \
     phpmyadmin/phpmyadmin
 ----
 
