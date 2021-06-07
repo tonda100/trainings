@@ -113,6 +113,6 @@
 
         <hadoop.version>2.2.0</hadoop.version>
         <arbiter.version>1.0.0-beta3</arbiter.version>
-        <logback.version>1.1.7</logback.version>
+        <logback.version>1.2.0</logback.version>
     </properties>
 </project>
