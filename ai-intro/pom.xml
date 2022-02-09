@@ -111,7 +111,7 @@
         <!-- Scala binary version: DL4J's Spark and UI functionality are released with both Scala 2.10 and 2.11 support -->
         <scala.binary.version>2.11</scala.binary.version>
 
-        <hadoop.version>2.2.0</hadoop.version>
+        <hadoop.version>2.10.1</hadoop.version>
         <arbiter.version>1.0.0-beta3</arbiter.version>
         <logback.version>1.1.7</logback.version>
     </properties>
